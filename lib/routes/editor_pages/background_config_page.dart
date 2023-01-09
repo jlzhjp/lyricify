@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../providers/editor_pods.dart';
-import '../../providers/states/background_config_state.dart';
+import '../../pods/editor_pods.dart';
+import '../../pods/states/background_config_state.dart';
 
 class BackgroundConfigPage extends StatefulWidget {
   const BackgroundConfigPage({super.key});

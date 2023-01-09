@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/song_info_pods.dart';
+import '../pods/song_info_pods.dart';
 import 'editor_page.dart';
 import '../widgets/blurred_image_background.dart';
 import '../widgets/lyric_item.dart';

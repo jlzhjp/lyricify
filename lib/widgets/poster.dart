@@ -4,12 +4,12 @@ import 'dart:ui' as ui;
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lyricify/extensions/rect.dart';
-import 'package:lyricify/providers/editor_pods.dart';
 
+import '../extensions/rect.dart';
+import '../pods/editor_pods.dart';
 import '../model/lyrics.dart';
-import '../providers/song_info_pods.dart';
-import '../providers/states/background_config_state.dart';
+import '../pods/song_info_pods.dart';
+import '../pods/states/background_config_state.dart';
 
 class Poster extends StatelessWidget {
   const Poster({super.key});

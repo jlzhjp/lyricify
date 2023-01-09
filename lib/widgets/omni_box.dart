@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../services/input_parser.dart';
 
 class OmniboxResult {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/song_info_pods.dart';
-import 'lyrics_selection_page.dart';
+import '../pods/song_info_pods.dart';
 import '../widgets/omni_box.dart';
+import 'lyrics_selection_page.dart';
 
 class StartPage extends ConsumerStatefulWidget {
   const StartPage({super.key});

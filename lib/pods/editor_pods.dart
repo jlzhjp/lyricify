@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lyricify/providers/states/background_config_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../pods/states/background_config_state.dart';
 part 'editor_pods.g.dart';
 
 enum EditorTab {

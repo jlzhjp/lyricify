@@ -24,7 +24,7 @@ void main() {
       TranslatedLyric(
           time: Duration(seconds: 0, milliseconds: 0),
           text: '作曲 : Eve',
-          tranlation: ''),
+          tranlation: null),
       TranslatedLyric(
           time: Duration(seconds: 24, milliseconds: 56),
           text: '思い焦がれたあの子',

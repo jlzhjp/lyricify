@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lyricify/widgets/mini_tab_view.dart';
 
-import '../providers/editor_pods.dart';
+import '../pods/editor_pods.dart';
+import '../widgets/mini_tab_view.dart';
 import '../widgets/poster.dart';
 import 'editor_pages/background_config_page.dart';
 

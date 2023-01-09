@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lyricify/model/song.dart';
 import 'package:rxdart/rxdart.dart';
@@ -10,13 +11,13 @@ const jsonString =
 void main() {
   test('parse json', () {
     Map<String, dynamic> jsonMap = json.decode(jsonString);
-    print(Song.fromJson(jsonMap));
+    debugPrint(Song.fromJson(jsonMap).toString());
   });
 
   test('subject', () {
     BehaviorSubject<int> subject = BehaviorSubject();
     subject.listen((value) {
-      print(value);
+      debugPrint(value.toString());
     });
     subject.add(1);
   });

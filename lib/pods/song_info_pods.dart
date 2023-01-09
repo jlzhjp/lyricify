@@ -20,7 +20,7 @@ class SongId extends _$SongId {
     return null;
   }
 
-  update(int songId) => state = songId;
+  void update(int songId) => state = songId;
 }
 
 @riverpod
