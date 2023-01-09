@@ -13,13 +13,21 @@ class BlurredImageBackground extends StatefulWidget {
 class _BlurredImageBackgroundState extends State<BlurredImageBackground> {
   @override
   Widget build(BuildContext context) {
-    return ColorFiltered(
-      colorFilter:
-          ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
-      child: ImageFiltered(
-        imageFilter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
-        child: widget.image,
-      ),
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final maskColor = isDarkMode ? Colors.black : Colors.white;
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: ImageFiltered(
+            imageFilter: ImageFilter.blur(sigmaX: 50, sigmaY: 50),
+            child: widget.image,
+          ),
+        ),
+        Positioned.fill(
+            child: Container(
+          decoration: BoxDecoration(color: maskColor.withOpacity(0.85)),
+        ))
+      ],
     );
   }
 }

@@ -22,14 +22,17 @@ class _SongInfoCardState extends State<SongInfoCard> {
     final textTheme = Theme.of(context).textTheme;
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.songInfo.name, style: textTheme.headline6),
-            Text(
-              widget.songInfo.album.name,
-              style: textTheme.subtitle2,
+            Text(widget.songInfo.name, style: textTheme.headline5),
+            Opacity(
+              opacity: 0.6,
+              child: Text(
+                widget.songInfo.album.name,
+                style: textTheme.subtitle2,
+              ),
             )
           ],
         ),

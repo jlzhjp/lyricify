@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lyricify/routes/start_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'routes/start_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,9 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme:
-          ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.red)),
+      title: 'Lyricify',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.red, brightness: Brightness.light),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.red, brightness: Brightness.dark),
+        useMaterial3: true,
+      ),
       home: const StartPage(),
     );
   }

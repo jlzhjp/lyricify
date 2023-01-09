@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:lyricify/routes/lyrics_selection_page.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../providers/song_info_pods.dart';
+import 'lyrics_selection_page.dart';
 import '../widgets/omni_box.dart';
 
-class StartPage extends StatefulWidget {
+class StartPage extends ConsumerStatefulWidget {
   const StartPage({super.key});
 
   @override
-  State<StartPage> createState() => _StartPageState();
+  ConsumerState<StartPage> createState() => _StartPageState();
 }
 
-class _StartPageState extends State<StartPage> {
+class _StartPageState extends ConsumerState<StartPage> {
   static const _gradient = LinearGradient(
-    colors: [
-      Color(0xFFCB356B),
-      Color(0xFFBD3F32),
-    ],
+    colors: [Color(0xFFCB356B), Color(0xFFBD3F32)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
 
-  void _onConfirmButtonPressed(BuildContext context, int songId) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => LyricsSelectionPage(songId: songId)));
+  void _onConfirmButtonPressed(int songId) {
+    ref.read(songIdPod.notifier).update(songId);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const LyricsSelectionPage()));
   }
 
   @override
@@ -47,8 +46,7 @@ class _StartPageState extends State<StartPage> {
                 Padding(
                   padding: const EdgeInsets.all(14.0),
                   child: Omnibox(
-                      onSubmit: (res) =>
-                          _onConfirmButtonPressed(context, res.songId)),
+                      onSubmit: (res) => _onConfirmButtonPressed(res.songId)),
                 ),
               ],
             ),

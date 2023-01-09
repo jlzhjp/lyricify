@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/input_parser.dart';
 
 class OmniboxResult {
   int songId;
@@ -17,6 +18,15 @@ class Omnibox extends StatefulWidget {
 
 class _OmniboxState extends State<Omnibox> {
   final TextEditingController _controller = TextEditingController();
+  String? _inputError;
+
+  @override
+  void initState() {
+    _controller.addListener(() {
+      setState(() => _inputError = null);
+    });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -25,7 +35,14 @@ class _OmniboxState extends State<Omnibox> {
   }
 
   void _onSubmitButtonPressed() {
-    widget.onSubmit(OmniboxResult(songId: int.parse(_controller.text)));
+    final content = _controller.text;
+    int? id = int.tryParse(content);
+    id ??= tryGetIdfromInput(content);
+    if (id == null) {
+      setState(() => _inputError = '无法解析输入的内容');
+    } else {
+      widget.onSubmit(OmniboxResult(songId: id));
+    }
   }
 
   @override
@@ -45,10 +62,12 @@ class _OmniboxState extends State<Omnibox> {
                 ]),
             child: TextField(
               controller: _controller,
-              decoration: const InputDecoration(
+              style: const TextStyle(color: Colors.black87),
+              decoration: InputDecoration(
+                  errorText: _inputError,
                   filled: true,
                   fillColor: Colors.white,
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.all(Radius.circular(50)))),
             ),
@@ -57,7 +76,7 @@ class _OmniboxState extends State<Omnibox> {
             padding: const EdgeInsets.all(30.0),
             child: FloatingActionButton(
                 backgroundColor: Colors.red,
-                onPressed: () => _onSubmitButtonPressed(),
+                onPressed: _onSubmitButtonPressed,
                 child: const Icon(Icons.arrow_forward_rounded)),
           )
         ],
