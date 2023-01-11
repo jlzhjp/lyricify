@@ -19,13 +19,9 @@ class Omnibox extends StatefulWidget {
 
 class _OmniboxState extends State<Omnibox> {
   final TextEditingController _controller = TextEditingController();
-  String? _inputError;
 
   @override
   void initState() {
-    _controller.addListener(() {
-      setState(() => _inputError = null);
-    });
     super.initState();
   }
 
@@ -35,12 +31,24 @@ class _OmniboxState extends State<Omnibox> {
     super.dispose();
   }
 
-  void _onSubmitButtonPressed() {
+  Widget _buildErrorDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Text('错误'),
+      content: const Text('无法解析输入的内容'),
+      actions: [
+        TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('确认'))
+      ],
+    );
+  }
+
+  void _onSubmitButtonPressed(BuildContext context) {
     final content = _controller.text;
     int? id = int.tryParse(content);
-    id ??= tryGetIdfromInput(content);
+    id ??= tryGetIdFromInput(content);
     if (id == null) {
-      setState(() => _inputError = '无法解析输入的内容');
+      showDialog(context: context, builder: _buildErrorDialog);
     } else {
       widget.onSubmit(OmniboxResult(songId: id));
     }
@@ -64,11 +72,10 @@ class _OmniboxState extends State<Omnibox> {
             child: TextField(
               controller: _controller,
               style: const TextStyle(color: Colors.black87),
-              decoration: InputDecoration(
-                  errorText: _inputError,
+              decoration: const InputDecoration(
                   filled: true,
                   fillColor: Colors.white,
-                  border: const OutlineInputBorder(
+                  border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.all(Radius.circular(50)))),
             ),
@@ -77,7 +84,7 @@ class _OmniboxState extends State<Omnibox> {
             padding: const EdgeInsets.all(30.0),
             child: FloatingActionButton(
                 backgroundColor: Colors.red,
-                onPressed: _onSubmitButtonPressed,
+                onPressed: () => _onSubmitButtonPressed(context),
                 child: const Icon(Icons.arrow_forward_rounded)),
           )
         ],

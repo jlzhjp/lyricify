@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'routes/start_page.dart';
+import 'theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent));
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -14,16 +21,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Lyricify',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.red, brightness: Brightness.light),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.red, brightness: Brightness.dark),
-        useMaterial3: true,
-      ),
+      themeMode: ThemeMode.system,
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: const StartPage(),
     );
   }

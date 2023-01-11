@@ -24,15 +24,15 @@ void main() {
       TranslatedLyric(
           time: Duration(seconds: 0, milliseconds: 0),
           text: '作曲 : Eve',
-          tranlation: null),
+          translation: null),
       TranslatedLyric(
           time: Duration(seconds: 24, milliseconds: 56),
           text: '思い焦がれたあの子',
-          tranlation: '思慕已久的那个人'),
+          translation: '思慕已久的那个人'),
       TranslatedLyric(
           time: Duration(seconds: 27, milliseconds: 58),
           text: '指さしたどの子',
-          tranlation: '指的是哪个人'),
+          translation: '指的是哪个人'),
     ];
     final translatedLyrics = TranslatedLyrics(lyrics, translation);
     expect(translatedLyrics.lyrics, expected);

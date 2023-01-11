@@ -1,12 +1,12 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fadein/flutter_fadein.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../pods/song_info_pods.dart';
-import 'editor_page.dart';
 import '../widgets/blurred_image_background.dart';
 import '../widgets/lyric_item.dart';
 import '../widgets/song_info_card.dart';
+import 'editor_page.dart';
 
 class LyricsSelectionPage extends StatefulWidget {
   const LyricsSelectionPage({super.key});
@@ -31,13 +31,8 @@ class _LyricsSelectionPageState extends State<LyricsSelectionPage> {
     final albumCover = ref.watch(albumCoverPod);
 
     return albumCover.when(
-        data: (imageBytes) => FadeIn(
-              child: Image.memory(
-                imageBytes,
-                fit: BoxFit.fill,
-                filterQuality: FilterQuality.high,
-              ),
-            ),
+        data: (imageBytes) =>
+            FadeIn(child: Image.memory(imageBytes, fit: BoxFit.fill)),
         error: (error, stackTrace) => Container(),
         loading: () => Container());
   }

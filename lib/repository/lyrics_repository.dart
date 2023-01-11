@@ -16,8 +16,8 @@ class LyricsRepository {
 
     String originalLrcString = jsonMap['lrc']['lyric'];
     String translatedLrcString = jsonMap['tlyric']?['lyric'] ?? '';
-    Lyrics oringinal = Lyrics.fromLrc(originalLrcString);
-    Lyrics tranlated = Lyrics.fromLrc(translatedLrcString);
-    return TranslatedLyrics(oringinal, tranlated);
+    Lyrics original = Lyrics.fromLrc(originalLrcString);
+    Lyrics translated = Lyrics.fromLrc(translatedLrcString);
+    return TranslatedLyrics(original, translated);
   }
 }

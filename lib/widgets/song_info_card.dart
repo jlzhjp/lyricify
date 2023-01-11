@@ -26,12 +26,12 @@ class _SongInfoCardState extends State<SongInfoCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(widget.songInfo.name, style: textTheme.headline5),
+            Text(widget.songInfo.name, style: textTheme.headlineSmall),
             Opacity(
               opacity: 0.6,
               child: Text(
                 widget.songInfo.album.name,
-                style: textTheme.subtitle2,
+                style: textTheme.titleSmall,
               ),
             )
           ],

@@ -1,6 +1,7 @@
 final regex = RegExp('id=(?<id>\\d+)');
 
-int? tryGetIdfromInput(String input) {
+/// 尝试从用户的输入中获取歌曲的 ID
+int? tryGetIdFromInput(String input) {
   final match = regex.firstMatch(input);
   if (match == null) {
     return null;

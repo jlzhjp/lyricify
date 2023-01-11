@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'states/font_config_state.dart';
+import 'states/page_config_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../pods/states/background_config_state.dart';
 part 'editor_pods.g.dart';
 
-enum EditorTab {
-  layout(icon: Icons.layers, description: '排版'),
-  text(icon: Icons.text_format, description: "文本"),
-  background(icon: Icons.image, description: "背景"),
-  decorations(icon: Icons.border_all, description: '装饰');
+typedef Updater<T> = T Function(T prev);
 
-  final IconData icon;
-  final String description;
-  const EditorTab({required this.icon, required this.description});
+@riverpod
+class PageConfig extends _$PageConfig {
+  @override
+  PageConfigState build() {
+    return const PageConfigState(width: 1080);
+  }
+
+  void update(Updater<PageConfigState> updater) {
+    state = updater(state);
+  }
 }
 
 @riverpod
@@ -20,14 +25,36 @@ class BackgroundConfig extends _$BackgroundConfig {
   @override
   BackgroundConfigState build() {
     return const BackgroundConfigState(
-        type: BackgroundType.none,
+        showBackground: false,
         backgroundColor: Colors.white,
-        lightness: 1,
-        sigma: 0);
+        imageOpacity: 0,
+        imageBlurSigma: 0);
   }
 
-  void update(
-      BackgroundConfigState Function(BackgroundConfigState oldState) updater) {
+  void update(Updater<BackgroundConfigState> updater) {
     state = updater(state);
   }
+}
+
+@riverpod
+class FontConfig extends _$FontConfig {
+  @override
+  FontConfigState build() {
+    return const FontConfigState(
+        autoGenerate: true,
+        lyricFontSize: 18,
+        translationFontSize: 14,
+        lyricColor: Colors.black,
+        translationColor: Colors.black45);
+  }
+
+  void update(Updater<FontConfigState> updater) {
+    state = updater(state);
+  }
+}
+
+@riverpod
+double posterHeight(PosterHeightRef ref, double width) {
+  // TODO
+  throw UnimplementedError();
 }

@@ -25,6 +25,7 @@ class _LyricItemState extends State<LyricItem> {
 
   @override
   Widget build(BuildContext context) {
+    // 用 Material 覆盖点击时才会有 Ripple Effect
     return Material(
       type: MaterialType.transparency,
       child: CheckboxListTile(
@@ -39,11 +40,11 @@ class _LyricItemState extends State<LyricItem> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, fontSize: 18)),
-              if (widget.lyric.tranlation != null)
+              if (widget.lyric.translation != null)
                 Opacity(
                   opacity: 0.7,
                   child: Text(
-                    widget.lyric.tranlation!,
+                    widget.lyric.translation!,
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 16),
                   ),

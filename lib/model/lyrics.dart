@@ -43,35 +43,35 @@ class Lyrics {
 }
 
 class TranslatedLyric extends Lyric with EquatableMixin {
-  final String? tranlation;
+  final String? translation;
 
   const TranslatedLyric({
     required super.time,
     required super.text,
-    this.tranlation,
+    this.translation,
   });
 
   @override
-  get props => [time, text, tranlation];
+  get props => [time, text, translation];
 }
 
 class TranslatedLyrics {
   final List<TranslatedLyric> lyrics = [];
 
-  TranslatedLyrics(Lyrics originalLyrics, Lyrics tranlatedLyrics) {
+  TranslatedLyrics(Lyrics originalLyrics, Lyrics translatedLyrics) {
     for (final originalLyric in originalLyrics.lyrics) {
-      int pos = binarySearch(tranlatedLyrics.lyrics, originalLyric,
+      int pos = binarySearch(translatedLyrics.lyrics, originalLyric,
           compare: (lhs, rhs) => lhs.time.compareTo(rhs.time));
-      late String? tranlation;
+      late String? translation;
       if (pos < 0) {
-        tranlation = null;
+        translation = null;
       } else {
-        tranlation = tranlatedLyrics.lyrics[pos].text;
+        translation = translatedLyrics.lyrics[pos].text;
       }
       lyrics.add(TranslatedLyric(
         time: originalLyric.time,
         text: originalLyric.text,
-        tranlation: tranlation,
+        translation: translation,
       ));
     }
   }

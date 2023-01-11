@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../pods/editor_pods.dart';
 import '../widgets/mini_tab_view.dart';
 import '../widgets/poster.dart';
-import 'editor_pages/background_config_page.dart';
+import 'config_pages/background_config_page.dart';
+import 'config_pages/font_config_page.dart';
+import 'config_pages/page_config_page.dart';
+
+enum EditorTab {
+  layout(icon: Icons.layers, description: '排版'),
+  text(icon: Icons.text_format, description: "文本"),
+  background(icon: Icons.image, description: "背景"),
+  decorations(icon: Icons.border_all, description: '装饰');
+
+  final IconData icon;
+  final String description;
+  const EditorTab({required this.icon, required this.description});
+}
 
 class EditorPage extends StatefulWidget {
   const EditorPage({super.key});
@@ -16,20 +28,24 @@ class EditorPage extends StatefulWidget {
 class _EditorPageState extends State<EditorPage> {
   Widget _buildPage(EditorTab tab, BuildContext context) {
     switch (tab) {
+      case EditorTab.layout:
+        return const PageConfigPage();
       case EditorTab.background:
         return const BackgroundConfigPage();
       case EditorTab.text:
-        return Container();
+        return const FontConfigPage();
       default:
         return Container();
     }
   }
 
   Widget _buildBottomBar(BuildContext context, WidgetRef ref, Widget? child) {
+    final textTheme = Theme.of(context).textTheme;
     return MiniTabView(
         tabs: EditorTab.values,
         pageBuilder: _buildPage,
-        itemBuilder: (tab, context) => Text(tab.description));
+        itemBuilder: (tab, context) =>
+            Text(tab.description, style: textTheme.labelLarge));
   }
 
   @override
@@ -41,21 +57,24 @@ class _EditorPageState extends State<EditorPage> {
             IconButton(onPressed: () {}, icon: const Icon(Icons.share))
           ],
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Expanded(
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Expanded(
                 child: Center(
-              child: AspectRatio(
-                aspectRatio: 9.0 / 16.0,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.white),
-                  child: Poster(),
+                  child: AspectRatio(
+                    aspectRatio: 9.0 / 16.0,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: Poster(),
+                    ),
+                  ),
                 ),
               ),
-            )),
-            Consumer(builder: _buildBottomBar)
-          ],
+              Consumer(builder: _buildBottomBar)
+            ],
+          ),
         ));
   }
 }
